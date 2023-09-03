@@ -2,33 +2,42 @@ import { registrarEventosGlobais } from './scripts.js';
 
 registrarEventosGlobais();
 
-novaEspecialidade.onclick = () => {
+let medicosInicial = [
+    {
+        id: 1,
+        nome: 'Dr. Paulo Roberto',
+        especialidade: 'Psiquiatra'
+    },
+    {
+        id: 2,
+        nome: 'Dr. Paulo Gabriel',
+        especialidade: 'Psiquiatra'
+    },
+    {
+        id: 3,
+        nome: 'Dr.Pedro',
+        especialidade: 'Ortopedista'
+    },
+];
+
+novoMedico.onclick = () => {
     overlay.classList.add('active');
     drawer.classList.add('active');
 }
 
-let especialidades =  JSON.parse(localStorage.getItem('especialidades')) || [];
-
 function listarEspecialidades(){
-    tabelaEspecialidades.innerHTML = '';
+    
+    let especialidades = JSON.parse(localStorage.getItem('especialidades')) || [];
+    medicoEspecialidade.innerHTML = '';
+
     if(especialidades.length === 0){
-        tabelaEspecialidades.innerHTML = `
-            <tr>
-                <td colspan="2" style="line-height: 40px;">Nenhuma especialidade cadastrada</td>
-            </tr>
+        medicoEspecialidade.innerHTML = `
+            <option>Nenhuma especialidade cadastrada</option>
         `;
     }else{
         for(let i = 0; i < especialidades.length; i++){
-            tabelaEspecialidades.innerHTML += `
-                <tr>
-                    <td>${especialidades[i].nome}</td>
-                    <td>
-                        <div class="acoes">
-                            <box-icon class="suave" name='pencil'></box-icon>
-                            <box-icon class="suave" name='trash' onClick="deletarEspecialidade(${especialidades[i].id})"></box-icon>
-                        </div>
-                    </td>
-                </tr>
+            medicoEspecialidade.innerHTML += `
+                <option value="${especialidades[i].id}">${especialidades[i].nome}</option>
             `;
         }
     }
@@ -36,29 +45,40 @@ function listarEspecialidades(){
 
 listarEspecialidades();
 
-function adicionarEspecialidade(){
-    formCriar.onsubmit = function(){
-        event.preventDefault();
-        let especialidade = {
-            id: (especialidades.length + 1),
-            nome: especialidadeNome.value
-        }
-        especialidades.push(especialidade);
-        localStorage.setItem('especialidades', JSON.stringify(especialidades));
-        listarEspecialidades();
+let horarios =  JSON.parse(localStorage.getItem('medicos')) || medicosInicial;
+
+function listarMedicos(){
+    tabelaMedicos.innerHTML = '';
+    for(let i = 0; i < horarios.length; i++){
+        tabelaMedicos.innerHTML += `
+            <tr>
+                <td>${horarios[i].nome}</td>
+                <td>${horarios[i].especialidade}</td>
+                <td>
+                    <div class="acoes">
+                        <box-icon class="suave" name='pencil'></box-icon>
+                        <box-icon class="suave" name='trash'></box-icon>
+                    </div>
+                </td>
+            </tr>
+        `;
     }
 }
 
-adicionarEspecialidade();
+listarMedicos();
 
-function deletarEspecialidade(id){
-    let aux = [];
-    for(let i = 0; i < especialidades.length; i++){
-        if(especialidades[i].id != id){
-            aux.push(especialidades[i]);
+function adicionarMedico(){
+    formCriar.onsubmit = function(e){
+        e.preventDefault();
+        let medico = {
+            id: (horarios.length + 1),
+            nome: medicoNome.value,
+            especialidade: medicoEspecialidade.options[medicoEspecialidade.selectedIndex].text 
         }
+        horarios.push(medico);
+        localStorage.setItem('medicos', JSON.stringify(horarios));
+        listarMedicos();
     }
-    especialidades = aux;
-    localStorage.setItem('especialidades', JSON.stringify(especialidades));
-    listarEspecialidades();
 }
+
+adicionarMedico();

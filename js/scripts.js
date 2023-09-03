@@ -1,64 +1,25 @@
-import { registrarEventosGlobais } from './scripts.js';
 
-registrarEventosGlobais();
-
-novaEspecialidade.onclick = () => {
-    overlay.classList.add('active');
-    drawer.classList.add('active');
-}
-
-let especialidades =  JSON.parse(localStorage.getItem('especialidades')) || [];
-
-function listarEspecialidades(){
-    tabelaEspecialidades.innerHTML = '';
-    if(especialidades.length === 0){
-        tabelaEspecialidades.innerHTML = `
-            <tr>
-                <td colspan="2" style="line-height: 40px;">Nenhuma especialidade cadastrada</td>
-            </tr>
-        `;
-    }else{
-        for(let i = 0; i < especialidades.length; i++){
-            tabelaEspecialidades.innerHTML += `
-                <tr>
-                    <td>${especialidades[i].nome}</td>
-                    <td>
-                        <div class="acoes">
-                            <box-icon class="suave" name='pencil'></box-icon>
-                            <box-icon class="suave" name='trash' onClick="deletarEspecialidade(${especialidades[i].id})"></box-icon>
-                        </div>
-                    </td>
-                </tr>
-            `;
-        }
+export function registrarEventosGlobais(){
+    fecharCriar.onclick = () => {
+        drawer.classList.remove('active');
+        setTimeout(() => {
+            overlay.classList.remove('active');
+        }, 700);
     }
-}
-
-listarEspecialidades();
-
-function adicionarEspecialidade(){
-    formCriar.onsubmit = function(){
-        event.preventDefault();
-        let especialidade = {
-            id: (especialidades.length + 1),
-            nome: especialidadeNome.value
-        }
-        especialidades.push(especialidade);
-        localStorage.setItem('especialidades', JSON.stringify(especialidades));
-        listarEspecialidades();
+    
+    overlay.onclick = () => {
+        drawer.classList.remove('active');
+        setTimeout(() => {
+            overlay.classList.remove('active');
+        }, 700);
     }
-}
-
-adicionarEspecialidade();
-
-function deletarEspecialidade(id){
-    let aux = [];
-    for(let i = 0; i < especialidades.length; i++){
-        if(especialidades[i].id != id){
-            aux.push(especialidades[i]);
+    
+    window.addEventListener('keydown', (e) => {
+        if(e.code === 'Escape'){
+            drawer.classList.remove('active');
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 700);
         }
-    }
-    especialidades = aux;
-    localStorage.setItem('especialidades', JSON.stringify(especialidades));
-    listarEspecialidades();
+    })
 }
