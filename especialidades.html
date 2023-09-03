@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Sim</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <div class="logo">
+                LOGO
+            </div>
+            <ul>
+                <li>
+                    <a href="/" class="mini-title suave">Início</a>
+                </li>
+                <li>
+                    <a href="/medicos.html" class="mini-title suave">Médicos</a>
+                </li>
+                <li>
+                    <a href="/horarios.html" class="mini-title suave">Horários</a>
+                </li>
+                <li>
+                    <a href="/especialidades.html" class="mini-title suave active">Especialidades</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="perfil">
+            <div class="foto"></div>
+            <h4>Germano Ribeiro <span>Operador</span></h4>
+        </div>
+    </header>
+    
+    <main>
+        <section id="especialidades">
+            <h2>
+                Especialidades 
+                <button id="novaEspecialidade" class="btn mini-title suave">
+                    <span class="suave">Nova Especialidade</span>
+                </button>
+            </h2>
+
+            <table>
+                <thead>
+                    <td class="mini-title">Especialidade</td>
+                    <td class="mini-title">Ações</td>
+                </thead>
+                <tbody id="tabelaEspecialidades"></tbody>
+            </table>
+            
+        </section>
+    </main>
+
+    <section id="overlay" class="suave"></section>
+    <div id="drawer" class="suave">
+        <form id="formCriar">
+            <h4>Criar <box-icon id="fecharCriar" class="suave" name='x'></box-icon></h4>
+            <label for="especialidadeNome" class="mini-title">Nome</label>
+            <input type="text" class="suave" id="especialidadeNome" placeholder="Digite o nome da especialidade" required>
+            <button type="submit" class="btn full mini-title suave">
+                <span class="suave">Salvar</span>
+            </button>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="module" src="js/especialidades.js"></script>
+</body>
+</html>

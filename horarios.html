@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Sim</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    
+    <header>
+        <nav>
+            <div class="logo">
+                LOGO
+            </div>
+            <ul>
+                <li>
+                    <a href="/" class="mini-title suave">Início</a>
+                </li>
+                <li>
+                    <a href="/medicos.html" class="mini-title suave">Médicos</a>
+                </li>
+                <li>
+                    <a href="/horarios.html" class="mini-title suave active">Horários</a>
+                </li>
+                <li>
+                    <a href="/especialidades.html" class="mini-title suave">Especialidades</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="perfil">
+            <div class="foto"></div>
+            <h4>>Germano Ribeiro<span>Operador</span></h4>
+        </div>
+    </header>
+    
+    <main>
+        <section id="horarios">
+            <h2>
+                Horários 
+                <button id="novoHorario" class="btn mini-title suave">
+                    <span class="suave">Novo horário</span>
+                </button>
+            </h2>
+
+            <table class="hack">
+                <thead>
+                    <td class="mini-title">Seg</td>
+                    <td class="mini-title">Ter</td>
+                    <td class="mini-title">Qua</td>
+                    <td class="mini-title">Qui</td>
+                    <td class="mini-title">Sex</td>
+                </thead>
+                <tbody id="tabelaHorarios"></tbody>
+            </table>
+            
+        </section>
+    </main>
+
+    <section id="overlay" class="suave"></section>
+    <div id="drawer" class="suave">
+        <form id="formCriar">
+            <h4>Criar <box-icon id="fecharCriar" class="suave" name='x'></box-icon></h4>
+            <label for="medico" class="mini-title">Médico</label>
+            <select id="medico" required></select>
+            <label for="diaSemana" class="mini-title">Dia</label>
+            <select class="suave" id="diaSemana" required>
+                <option value="1">Segunda</option>
+                <option value="2">Terça</option>
+                <option value="3">Quarta</option>
+                <option value="4">Quinta</option>
+                <option value="5">Sexta</option>
+            </select>
+            <label for="horarioOpt" class="mini-title">Horario</label>
+            <select class="suave" id="horarioOpt" required>
+                <option value="1">10:00</option>
+                <option value="2">11:00</option>
+                <option value="3">15:00</option>
+                <option value="4">16:00</option>
+            </select>
+            <button type="submit" class="btn full mini-title suave">
+                <span class="suave">Salvar</span>
+            </button>
+        </form>
+    </div>
+
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <script type="module" src="js/horarios.js"></script>
+</body>
+</html>
